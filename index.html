@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar with Light/Dark Mode</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0f111a;
+            /* Dark background */
+            color: #c1c5cd;
+            /* Light text color */
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.light-mode {
+            background-color: #ffffff;
+            /* Light background */
+            color: #000000;
+            /* Dark text color */
+        }
+
+        nav {
+            display: flex;
+            justify-content: flex-end;
+            /* Align items to the right */
+            padding: 20px 20%;
+            background-color: #0f111a;
+            /* Match background color */
+            transition: background-color 0.3s;
+            border-bottom: 1px solid #1a1d2b;
+        }
+
+        nav.light-mode {
+            background-color: #f5f5f5;
+            /* Light background for nav */
+        }
+
+        .mode-switch {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            color: #c1c5cd;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        body.light-mode .mode-switch {
+            color: #000000;
+        }
+
+        .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: #1a1d2b;
+            /* Slightly lighter background for the icon */
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+
+        nav.light-mode .icon {
+            background-color: #e0e0e0;
+            /* Lighter background in light mode */
+        }
+
+        .icon img {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="mode-switch" onclick="toggleMode()">
+            <span id="mode-text">Light Mode &#10132;</span>
+            <div class="icon">
+                <img id="mode-icon" src="https://img.icons8.com/ios-filled/50/ffffff/sun.png" alt="Light Mode">
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        function toggleMode() {
+            const body = document.body;
+            const nav = document.querySelector('nav');
+            const modeText = document.getElementById('mode-text');
+            const modeIcon = document.getElementById('mode-icon');
+
+            body.classList.toggle('light-mode');
+            nav.classList.toggle('light-mode');
+
+            if (body.classList.contains('light-mode')) {
+                modeText.textContent = "Dark Mode ->";
+                modeIcon.src = "https://img.icons8.com/ios-filled/50/000000/moon-symbol.png";
+            } else {
+                modeText.textContent = "Light Mode ->";
+                modeIcon.src = "https://img.icons8.com/ios-filled/50/ffffff/sun.png";
+            }
+        }
+    </script>
+</body>
+
+</html>
