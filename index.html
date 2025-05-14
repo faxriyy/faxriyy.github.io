@@ -1,115 +1,551 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar with Light/Dark Mode</title>
+    <title>Минималистичное портфолио</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
-
-        body {
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-color: #6366F1;
+            --secondary-color: #4F46E5;
+            --bg-color: #F9FAFB;
+            --text-color: #1F2937;
+            --text-light: #6B7280;
+            --white: #FFFFFF;
+            --border-radius: 12px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
             margin: 0;
             padding: 0;
-            background-color: #0f111a;
-            /* Dark background */
-            color: #c1c5cd;
-            /* Light text color */
-            font-family: 'Lato', sans-serif;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 80px 0 40px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.05) 0%, rgba(99, 102, 241, 0) 100%);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
             font-weight: 700;
-            transition: background-color 0.3s, color 0.3s;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-
-        body.light-mode {
-            background-color: #ffffff;
-            /* Light background */
-            color: #000000;
-            /* Dark text color */
+        
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
+        
+        /* Navigation */
         nav {
+            margin: 40px 0;
+        }
+        
+        nav ul {
+            list-style: none;
             display: flex;
-            justify-content: flex-end;
-            /* Align items to the right */
-            padding: 20px 20%;
-            background-color: #0f111a;
-            /* Match background color */
-            transition: background-color 0.3s;
-            border-bottom: 1px solid #1a1d2b;
+            justify-content: center;
+            gap: 40px;
         }
-
-        nav.light-mode {
-            background-color: #f5f5f5;
-            /* Light background for nav */
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 8px 0;
+            transition: var(--transition);
         }
-
-        .mode-switch {
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+        }
+        
+        section:nth-child(even) {
+            background-color: var(--white);
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 60px;
+            text-align: center;
+            position: relative;
+            color: var(--text-color);
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        /* Projects Section */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        
+        .project {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .project:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .project img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .project-info {
+            padding: 24px;
+        }
+        
+        .project-tag {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .project-desc {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .project-link {
+            display: inline-block;
+            color: var(--primary-color);
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .project-link:hover {
+            color: var(--secondary-color);
+        }
+        
+        /* About Section */
+        .about {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .profile-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 40px;
+        }
+        
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--white);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .profile-bg {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            top: -10px;
+            left: -10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            z-index: -1;
+            opacity: 0.2;
+        }
+        
+        .about p {
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .skill {
+            background: var(--white);
+            color: var(--text-color);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .skill:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            background: var(--primary-color);
+            color: var(--white);
+        }
+        
+        /* Contact Section */
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+            background-color: #F3F4F6;
+            color: var(--text-color);
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            background-color: var(--white);
+        }
+        
+        textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+        
+        button {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(79, 70, 229, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #111827;
+            color: #9CA3AF;
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+        
+        footer p {
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        .social-link {
+            color: #D1D5DB;
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
             display: flex;
             align-items: center;
             gap: 8px;
-            cursor: pointer;
-            color: #c1c5cd;
-            font-size: 16px;
-            transition: color 0.3s;
         }
-
-        body.light-mode .mode-switch {
-            color: #000000;
+        
+        .social-link:hover {
+            color: var(--white);
         }
-
-        .icon {
+        
+        .footer-nav {
             display: flex;
             justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            background-color: #1a1d2b;
-            /* Slightly lighter background for the icon */
-            border-radius: 10px;
-            transition: background-color 0.3s;
+            gap: 24px;
+            margin-bottom: 30px;
         }
-
-        nav.light-mode .icon {
-            background-color: #e0e0e0;
-            /* Lighter background in light mode */
+        
+        .footer-nav a {
+            color: #D1D5DB;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
         }
-
-        .icon img {
-            width: 24px;
-            height: 24px;
+        
+        .footer-nav a:hover {
+            color: var(--white);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #6B7280;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+            }
+            
+            .projects {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 30px 20px;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
         }
     </style>
 </head>
-
 <body>
-    <nav>
-        <div class="mode-switch" onclick="toggleMode()">
-            <span id="mode-text">Light Mode &#10132;</span>
-            <div class="icon">
-                <img id="mode-icon" src="https://img.icons8.com/ios-filled/50/ffffff/sun.png" alt="Light Mode">
+    <header>
+        <div class="container">
+            <div class="logo">IV</div>
+            <h1>Иван Иванов</h1>
+            <p class="subtitle">UX/UI Дизайнер & Веб-разработчик, создающий красивые и функциональные цифровые продукты</p>
+            <nav>
+                <ul>
+                    <li><a href="#projects">Проекты</a></li>
+                    <li><a href="#about">Обо мне</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section id="projects">
+        <div class="container">
+            <h2>Избранные проекты</h2>
+            <div class="projects">
+                <div class="project">
+                    <img src="/api/placeholder/400/320" alt="Проект 1">
+                    <div class="project-info">
+                        <span class="project-tag">UX/UI Дизайн</span>
+                        <h3 class="project-title">Редизайн веб-приложения</h3>
+                        <p class="project-desc">Полный редизайн пользовательского интерфейса для улучшения пользовательского опыта и повышения конверсии.</p>
+                        <a href="#" class="project-link">Подробнее →</a>
+                    </div>
+                </div>
+                
+                <div class="project">
+                    <img src="/api/placeholder/400/320" alt="Проект 2">
+                    <div class="project-info">
+                        <span class="project-tag">Разработка</span>
+                        <h3 class="project-title">Мобильное приложение</h3>
+                        <p class="project-desc">Дизайн и разработка интерфейса для iOS и Android приложения для стартапа в сфере здоровья.</p>
+                        <a href="#" class="project-link">Подробнее →</a>
+                    </div>
+                </div>
+                
+                <div class="project">
+                    <img src="/api/placeholder/400/320" alt="Проект 3">
+                    <div class="project-info">
+                        <span class="project-tag">Веб-дизайн</span>
+                        <h3 class="project-title">Корпоративный сайт</h3>
+                        <p class="project-desc">Создание современного и минималистичного корпоративного сайта для IT-компании.</p>
+                        <a href="#" class="project-link">Подробнее →</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
-
-    <script>
-        function toggleMode() {
-            const body = document.body;
-            const nav = document.querySelector('nav');
-            const modeText = document.getElementById('mode-text');
-            const modeIcon = document.getElementById('mode-icon');
-
-            body.classList.toggle('light-mode');
-            nav.classList.toggle('light-mode');
-
-            if (body.classList.contains('light-mode')) {
-                modeText.textContent = "Dark Mode ->";
-                modeIcon.src = "https://img.icons8.com/ios-filled/50/000000/moon-symbol.png";
-            } else {
-                modeText.textContent = "Light Mode ->";
-                modeIcon.src = "https://img.icons8.com/ios-filled/50/ffffff/sun.png";
-            }
-        }
-    </script>
+    </section>
+    
+    <section id="about">
+        <div class="container">
+            <h2>Обо мне</h2>
+            <div class="about">
+                <div class="profile-container">
+                    <img src="/api/placeholder/150/150" alt="Фото профиля" class="profile-pic">
+                    <div class="profile-bg"></div>
+                </div>
+                <p>Привет! Я Иван, UX/UI дизайнер и веб-разработчик с 5-летним опытом работы. Я специализируюсь на создании чистых, минималистичных и функциональных пользовательских интерфейсов.</p> 
+                <p>Моя цель — сделать цифровые продукты максимально понятными и удобными для пользователей, одновременно создавая красивые и визуально привлекательные решения.</p>
+                <p>Я страстно увлечен проектированием пользовательского опыта и постоянно совершенствую свои навыки, чтобы создавать продукты, которые не только красивы, но и решают реальные проблемы пользователей.</p>
+                
+                <div class="skills">
+                    <span class="skill">UI/UX Design</span>
+                    <span class="skill">HTML/CSS</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">React</span>
+                    <span class="skill">Figma</span>
+                    <span class="skill">Adobe XD</span>
+                    <span class="skill">Responsive Design</span>
+                    <span class="skill">Прототипирование</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <div class="container">
+            <h2>Связаться со мной</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Имя</label>
+                    <input type="text" id="name" placeholder="Ваше имя" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Электронная почта</label>
+                    <input type="email" id="email" placeholder="ваш@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Сообщение</label>
+                    <textarea id="message" placeholder="Расскажите о вашем проекте..." required></textarea>
+                </div>
+                
+                <button type="submit">Отправить сообщение</button>
+            </form>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#" class="social-link">LinkedIn</a>
+                <a href="#" class="social-link">Behance</a>
+                <a href="#" class="social-link">GitHub</a>
+                <a href="#" class="social-link">Dribbble</a>
+            </div>
+            
+            <div class="footer-nav">
+                <a href="#projects">Проекты</a>
+                <a href="#about">Обо мне</a>
+                <a href="#contact">Контакты</a>
+            </div>
+            
+            <p class="copyright">© 2025 Иван Иванов. Все права защищены.</p>
+        </div>
+    </footer>
 </body>
-
 </html>
